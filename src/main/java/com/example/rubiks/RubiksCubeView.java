@@ -33,7 +33,7 @@ public class RubiksCubeView {
                     cubie.setTranslateX(xPosition);
                     cubie.setTranslateY(yPosition);
                     cubie.setTranslateZ(zPosition);
-                    cubie.setMaterial(new PhongMaterial(Color.DARKMAGENTA));
+                    cubie.setMaterial(new PhongMaterial(Color.GRAY));
                     //FOR X
                     if (x==0) {
 

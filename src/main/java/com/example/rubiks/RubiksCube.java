@@ -22,6 +22,7 @@ public class RubiksCube {
     public char[][] getRight(){
         return right;
     }
+    public char[][] getFront() {return front; }
 
     //initialize each face with its color
     public RubiksCube() {

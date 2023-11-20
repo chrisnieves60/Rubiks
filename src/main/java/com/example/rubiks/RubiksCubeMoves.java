@@ -3,7 +3,23 @@ package com.example.rubiks;
 public class RubiksCubeMoves {
 
     //helper function  rotates a face given its 2D array.
+    public void rotateFaceClockwise(char[][] face) {
+        char temp = face[0][0];
+        face[0][0] = face[2][0];
+        face[2][0] = face[2][2];
+        face[2][2] = face[0][2];
+        face[0][2] = temp;
+
+        temp = face[0][1];
+        face[0][1] = face[1][0];
+        face[1][0] = face[2][1];
+        face[2][1] = face[1][2];
+        face[1][2] = temp;
+    }
+
+
     public void frontRotationClockwise(RubiksCube cube) {
+        rotateFaceClockwise(cube.getFront());
         char[][] up = cube.getUp();
         char[][] down = cube.getDown();
         char[][] left = cube.getLeft();

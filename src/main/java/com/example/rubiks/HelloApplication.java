@@ -2,6 +2,7 @@ package com.example.rubiks;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.stage.Stage;
@@ -13,14 +14,18 @@ import javafx.scene.SubScene;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.paint.Color;
 
+import static javafx.scene.input.KeyCode.R;
+
 public class HelloApplication extends Application {
     private SubScene subScene;
     private MouseHandler mouseHandler;
+
 
     @Override
     public void start(Stage stage) {
         // Create the main 3D world container
         Group world = new Group();
+
 
         // Initialize a subscene for 3D rendering
         subScene = new SubScene(world, 800, 600, true, SceneAntialiasing.BALANCED);
@@ -44,6 +49,7 @@ public class HelloApplication extends Application {
         Group cubeGroup = new Group();
         //instantiate Rubiks cube view
         RubiksCubeView rubiksCubeView = new RubiksCubeView();
+        updateCubeVisual visualRotation = new updateCubeVisual();
         world.getChildren().add(rubiksCubeView.getCubeGroup());
 
 
@@ -53,6 +59,12 @@ public class HelloApplication extends Application {
         root.getChildren().add(subScene);
         stage.setTitle("Rubik's Cube Application");
         Scene scene = new Scene(root, 800, 600);
+        scene.setOnKeyPressed((KeyEvent event) -> {
+            switch (event.getCode()) {
+                case R: //call rotation method wehn r is pressed
+                    visualRotation.rotateFrontFace(rubiksCubeView.getFrontRotationGroup(), true);
+            }
+        });
         scene.setFill(Color.LIGHTBLUE); //set background color of main screen
         stage.setScene(scene);
         stage.show();

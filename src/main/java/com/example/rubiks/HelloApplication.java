@@ -26,7 +26,6 @@ public class HelloApplication extends Application {
         // Create the main 3D world container
         Group world = new Group();
 
-
         // Initialize a subscene for 3D rendering
         subScene = new SubScene(world, 800, 600, true, SceneAntialiasing.BALANCED);
 
@@ -46,13 +45,11 @@ public class HelloApplication extends Application {
         subScene.setCamera(camera);
 
         // Create a group for the Rubik's Cube
-        Group cubeGroup = new Group();
         //instantiate Rubiks cube view
         RubiksCubeView rubiksCubeView = new RubiksCubeView();
-        updateCubeVisual visualRotation = new updateCubeVisual();
+        faceRotation faceRotation = new faceRotation();
         world.getChildren().add(rubiksCubeView.getCubeGroup());
-
-
+        world.getChildren().add(faceRotation.tempCubeGroup());
 
         // Set up the main scene and display it
         Group root = new Group();
@@ -61,8 +58,43 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(root, 800, 600);
         scene.setOnKeyPressed((KeyEvent event) -> {
             switch (event.getCode()) {
-                case R: //call rotation method wehn r is pressed
-                    visualRotation.rotateFrontFace(rubiksCubeView.getFrontRotationGroup(), true);
+                case R: //call rotation method when r is pressed
+                    faceRotation.performRotation("front", rubiksCubeView, true);
+                    rubiksCubeView.updateCubieMembership();
+                    /*for(int i=0; i<3; i++) {
+                        for (int j = 0; j < 3; j++) {
+                            System.out.println("rotation membership of front elements:"+ rubiksCubeView.getCubie(0, i, j).getRotationMember() + "rubikscubeelement x: 0" + "Y: "+ i +" Z: "+j);
+                        }
+                   */
+                    break;
+                case T: //call rotation method when r is pressed
+                    faceRotation.performRotation("back", rubiksCubeView, true);
+                    rubiksCubeView.updateCubieMembership();
+
+                    break;
+                case Y: //call rotation method when r is pressedt
+
+                    faceRotation.performRotation("left", rubiksCubeView, true);
+                    rubiksCubeView.updateCubieMembership();
+                    break;
+                case F: //call rotation method when r is pressed
+
+                    faceRotation.performRotation("right", rubiksCubeView, true);
+                    rubiksCubeView.updateCubieMembership();
+                    break;
+                case G: //call rotation method when r is pressed
+
+                    faceRotation.performRotation("up", rubiksCubeView, true);
+                    rubiksCubeView.updateCubieMembership();
+                    break;
+                case H: //call rotation method when r is pressed
+
+                    faceRotation.performRotation("down", rubiksCubeView, true);
+                    rubiksCubeView.updateCubieMembership();
+                    break;
+
+
+
             }
         });
         scene.setFill(Color.LIGHTBLUE); //set background color of main screen
